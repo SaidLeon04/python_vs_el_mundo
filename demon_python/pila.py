@@ -1,71 +1,86 @@
-class NodoPila:
-    def __init__(self, info):
-        self.info = info
-        self.sig = None
+class NodoPila: # clase para cada nodo de la pila
+    def __init__(self, info): # constructor de la clase
+        self.info = info # almacena el elemento
+        self.sig = None # almacena el siguiente nodo como NONE
 
-class Pila:
-    def __init__(self):
-        self.cima = None
-        self.tamanio = 0
+class Pila: # clase para la pila
+    def __init__(self): # constructor de la clase
+        self.cima = None # asigna el valor a la cima
+        self.tamanio = 0 # inicializa el tamaño de la pila
 
-    def apilar(pila, dato):
-        nodo = NodoPila(dato)
-        nodo.info = dato
-        nodo.sig = pila.cima
-        pila.cima = nodo
-        pila.tamanio += 1
+    def apilar(pila, dato): # método para apilar
+        nodo = NodoPila(dato) # crea un nodo con el dato
+        nodo.info = dato # asigna el dato al nodo
+        nodo.sig = pila.cima # asigna la cima a la siguiente posición
+        pila.cima = nodo # asigna el nodo a la cima
+        pila.tamanio += 1   # incrementa el tamaño de la pila
 
-    def desapilar(pila):
-        x = pila.cima.info
-        pila.cima = pila.cima.sig
-        pila.tamanio -= 1
-        return x
+    def desapilar(pila): # método para desapilar
+        x = pila.cima.info # almacena el dato de la cima
+        pila.cima = pila.cima.sig # asigna el siguiente nodo a la cima
+        pila.tamanio -= 1 # decrementa el tamaño de la pila
+        return x   # retorna el dato de la cima
 
-    def pila_vacia(pila):
-        return pila.cima is None
+    def pila_vacia(pila): # método para verificar si la pila está vacía
+        return pila.cima is None # retorna True si la cima es NONE
 
-    def en_cima(pila):
-        if pila.cima is not None:
-            return pila.cima.info
-        else:
-            return None
+    def en_cima(pila): # método para obtener el dato de la cima
+        if pila.cima is not None:   # si la cima no es NONE
+            return pila.cima.info  # retorna el dato de la cima
+        else: # caso contrario
+            return None # retorna NONE
 
-    def obtener_tamanio(pila):
-        return pila.tamanio
+    def obtener_tamanio(pila): # método para obtener el tamaño de la pila
+        return pila.tamanio #retorna el tamaño de la pila
+    
+    def imprimir_pila(pila):
+        print("Pila actual:")
+        nodo_actual = pila.cima
+        while nodo_actual is not None:
+            print(nodo_actual.info)
+            nodo_actual = nodo_actual.sig
+        print("----")
 
-# Interacción con el usuario
-pila = Pila()
-while True:
-    print("Opciones:")
+# Menu
+pila = Pila() # crea un objeto de la clase Pila
+while True: # ciclo para el menú
+    print("Opciones:") # muestra las opciones
     print("1. Apilar")
     print("2. Desapilar")
     print("3. Mostrar la cima")
     print("4. Mostrar el tamaño")
-    print("5. Ver pila")
+    print("5. Mostrar la pila")
     print("6. Salir")
-    opcion = input("Seleccione una opción: ")
+    opcion = input("Seleccione una opción: ") # pide la entrada del usuario
 
-    if opcion == "1":
-        dato = input("Ingrese el valor a apilar: ")
-        pila.apilar(dato)
-    elif opcion == "2":
-        elemento = pila.desapilar()
-        if elemento is not None:
-            print("Elemento desapilado:", elemento)
-        else:
+    if opcion == "1": # si la opción es 1
+        dato = input("Ingrese el valor a apilar: ") # pide el dato a apilar
+        pila.apilar(dato) # llama al método apilar
+        pila.imprimir_pila()
+    elif opcion == "2": # si la opción es 2
+        elemento = pila.desapilar() # llama al método desapilar
+        if elemento is not None: # si el elemento no es NONE
+            print("Elemento desapilado:", elemento) # muestra el elemento
+            pila.imprimir_pila()
+        else: # caso contrario
             print("La pila está vacía.")
-    elif opcion == "3":
-        cima = pila.en_cima()
-        if cima is not None:
-            print("Cima de la pila:", cima)
-        else:
+            pila.imprimir_pila()
+    elif opcion == "3":  # si la opción es 3
+        cima = pila.en_cima() # llama al método en_cima
+        if cima is not None: # si la cima no es NONE
+            print("Cima de la pila:", cima) # muestra la cima
+            pila.imprimir_pila()
+        else: # caso contrario
             print("La pila está vacía.")
-    elif opcion == "4":
-        tamaño = pila.obtener_tamanio()
-        print("Tamaño de la pila:", tamaño)
+            pila.imprimir_pila()
+    elif opcion == "4": # si la opción es 4
+        tamaño = pila.obtener_tamanio() # llama al método obtener_tamanio
+        print("Tamaño de la pila:", tamaño) # muestra el tamaño
+        pila.imprimir_pila()
     elif opcion == "5":
-        print("pila actual: ", pila)
-    elif opcion == "6":
-        break
-    else:
-        print("Opción no válida. Por favor, elija una opción válida.")
+        print("Pila actual: ")
+        pila.imprimir_pila()
+    elif opcion == "6": # si la opción es 5
+        break # rompe el ciclo
+    else: # caso contrario
+        print("Opción no válida")

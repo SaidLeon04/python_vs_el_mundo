@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados de la consulta</title>
+</head>
+<body>
+    <h1>Resultados de la consulta</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                {% for columna in columnas %}
+                    <th>{{ columna }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in resultados %}
+                <tr>
+                    {% for valor in fila %}
+                        <td><a href="#">{{ valor }}</a></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
